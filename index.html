@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bunny Adventures Game</title>
+</head>
+<body>
+<div id="game-root">
+
+<div id="game-intro-screen">    <!--This container holds the intro screen plus a button. Dissolve this intro screen upon button click and load the next container-->
+    <h1 id="game-title">Bunny Adventures</h1>
+    <p id="game-subtitle">Created by Victoria Nguyen</p>
+    <button id="start-button" onclick="start_game()">START</button>    <!--onclick="start_game"-->
+</div>
+
+<div id="game-screen" style="display: none;">
+    <img id="scene-image" src="" alt="Scene">   <!--The contents of what each tag contains will change based on the inputs; TS will take care of the changes-->
+    <img id="player-image" src="" alt="Character"> <!--This tag will always have the player image; it's just a matter of displaying the character or not-->
+    <img id="character-image-1" src="" alt="NPC1"> <!--This tag holds another character's image; TS will take care of the changes based on who is talking-->
+    <img id="character-image-2" src="" alt="NPC2"> <!--This tag holds another character's image; TS will take care of the changes based on who is talking-->
+    <div id="button-container" style="display: none;">
+        <button class="choice-button" id="choice-1" onclick="choice(0)"></button>
+        <button class="choice-button" id="choice-2" onclick="choice(1)"></button>
+        <button class="choice-button" id="choice-3" onclick="choice(2)"></button>
+    </div>
+    <div id="character-creation-screen" style="display: none;"> <!--The contents of this container display during character creation and disappear everywhere else-->
+        <div id="name-step">
+            <input type="text" id="player-name" name="player-name">
+            <button id="name-submit" class="submit-button">confirm</button>
+        </div>
+        <div id="class-step" style="display: none;">
+            <div id="class-radio">
+                <input type="radio" id="knight" name="class" value="knight">
+                <label for="knight">Knight</label><br>
+                <input type="radio" id="archer" name="class" value="archer">
+                <label for="archer">Archer</label><br>
+                <input type="radio" id="priest" name="class" value="priest">
+                <label for="priest">Priest</label>
+                <input type="radio" id="warrior" name="class" value="warrior">
+                <label for="warrior">Warrior</label>
+                <input type="radio" id="mage" name="class" value="mage">
+                <label for="mage">Mage</label>
+            </div>
+            <div id="class-button">
+                <button id="class-submit" class="submit-button">confirm</button>
+            </div>
+        </div>
+    </div>
+    <div class="textbox" id="speaker-name"></div>   <!--This box holds the name of the character currently speaking-->
+    <div class="textbox" id="main-text" style="border-style: dashed;"></div>  <!--This box will be styled for a certain size; will not adjust to text content--> 
+    <!--"click-to-continue" by adding an eventlisterner to the main-text box--> 
+</div>
+
+<!--Add a black out screen between chapters to visually indicate that the chapter is done. Player can also choose to stop story at end of chapters-->
+
+</div>
+<script src="dist/chapters.js"></script>
+<script src="dist/script.js"></script>
+</body>
+</html>

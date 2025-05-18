@@ -1,0 +1,72 @@
+{
+    "chapter0": {
+        "title": "The Start of It All!",
+        "scenes": [
+            {"type": "normal", "text": "It was a sunny morning in Carrot Town, with the hustle and bustle of everyone leaving their burrows to head to work. Today is the day you’re heading out to become an adventurer!"},
+            {"type": "normal", "text": "You pack up some gold and head out of your burrow to go straight to the adventurer’s guild until…"},
+            {"type": "normal", "text": "Hey you! Drop all your gold before I come over there and sucker kick you!", "speaker": "Robber"},
+            {"type": "normal", "text": "You turn around to see a thug bunny holding a wooden spear pointed straight at you! What are you going to do?!",
+             "choices": [
+                {"text": "You get out of here before I sucker kick you!", "index": 4, "length": 2, "next": 14},
+                {"text": "Take all my money! Just don’t hurt me!", "index": 6, "length": 4, "next": 14},
+                {"text": "You’ll have to catch me first!", "index": 11, "length": 4, "next": 14}
+             ]
+            },
+            {"type": "normal", "text": "Ha! You don’t scare me you little bunny. I’ll show you whose boss right now!", "speaker": "Robber"},
+            {"type": "normal", "text": "The robber starts running towards you, ready to hit you with the spear. You get ready to launch a kick at the robber until the wind picks up and blows dust into your eyes! You close your eyes in anticipation of getting hit, but suddenly..."},
+            {"type": "normal", "text": "What a wuss! You should just go crying back to your mama and bring me some more gold while you’re at it!", "speaker": "Robber"},
+            {"type": "normal", "text": "The robber starts to slowly walk towards you as you take your gold out to put on the ground, but the pouch gets stuck inside your sack."},
+            {"type": "normal", "text": "Stop pretending and hurry up and take out the gold!", "speaker": "Robber"},
+            {"type": "normal", "text": "The robber is ready to hit you with the spear and you close your eyes, when suddenly"},
+            {"type": "normal", "text": "Hey! You better not run!", "speaker": "Robber"},
+            {"type": "normal", "text": "You turn to run away and try to make a quick dash for it when you feel something tug onto your bag. The robber caught up to you! So fast!"},
+            {"type": "normal", "text": "Nice try kid, but now I’m really going to take your gold!", "speaker": "Robber"},
+            {"type": "normal", "text": "The robber shoves you onto the ground and gets ready to hit you with the spear. You close your eyes in anticipation, when suddenly"},
+            {"type": "normal", "text": "You hear a thump to the ground followed by a groan. You rub the dust out of your eyes and look up to see a knight bunny holding his sword over the robber!"},
+            {"type": "normal", "text": "Looks like I got to you just in time! You alright there kiddo?", "speaker": "Knight Bunny"},
+            {"type": "normal", "text": "The knight bunny helps you up and starts to brush some of the dirt off of your fur."},
+            {"type": "normal", "text": "You almost had a little tussle there kiddo, thank goodness you were already close to the adventurer’s guild. You looking to be an adventurer?", "speaker": "Knight Bunny",
+             "choices": [
+                {"text": "You betcha!", "index": 18, "length": 1, "next": 21},
+                {"text": "I totally had it under control", "index": 19, "length": 1, "next": 21},
+                {"text": "Not anymore, the outside world is scary!", "index": 20, "length": 1, "next": 21}
+             ]
+            },
+            {"type": "normal", "text": "That's the spirit! Let's get you over to the guild.", "speaker":"Knight Bunny"},
+            {"type": "normal", "text": "I'm sure you did. Let's hurry up and get you over to the guild.", "speaker": "Knight Bunny"},
+            {"type": "normal", "text": "Haha, no need to worry! How about I escort you over to the guild?", "speaker": "Knight Bunny"},
+            {"type": "normal", "text": "The knight bunny leads you inside the guild, and you can see all different kinds of bunnies."},
+            {"type": "special", 
+            "text": [
+                "You see a mage bunny flipping through a bunch of books, ",
+                "a warrior bunny sharpening his ax, ",
+                "an archer bunny stringing up his bow, ",
+                "and a priest bunny praying over a bunny adventurer party"
+             ],
+             "image": [
+             ]},
+             {"type": "normal", "text": "There’s all different classes that you can be, but I personally like being a knight", "speaker": "Knight Bunny", "image": ""},
+             {"type": "normal", "text": "Anyway, let’s get you registered as an adventurer.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "You and knight bunny walk to the guild counter where you are greeted by the clerk."},
+             {"type":"normal", "text": "Good morning and welcome to Carrot Town’s adventurers guild! What can I help you with?", "speaker":"Guild Clerk"},
+             {"type":"normal", "text": "This fluff ball here wants to be an adventurer. Can we get them started with their paperwork?", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Of course! We just need to get a couple of things started first before we can issue you a guild card. Let’s go through some housekeeping.", "speaker":"Guild Clerk"},
+             {"type":"system", "text": "What is your name?"},
+             {"type":"normal", "text": "Alright! Now we just need to pick out a class you would like to be. I've listed out some options that you could try out!", "speaker":"Guild Clerk"},
+             {"type":"system", "text": "What class do you want to be?\n"},
+             {"type":"normal", "text": "Sweet! Let me just fill this out here, stamp right there, and done! Welcome to Carrot Town’s adventurers guild, ", "speaker":"Guild Clerk"},
+             {"type":"normal", "text": "You’ve done it! Congratulations on registering for the adventurers guild. But now what?"},
+             {"type":"normal", "text": "Good job kiddo, now you can go off onto the next town and see the cool sights as a newbie. I could be part of your party until the next town if you want, I have some business over there anyway.", "speaker":"Knight Bunny",
+              "choices":[
+                {"text": "Thanks for offering, I'll take you up on that!", "index": 35, "length": 1, "next": 38},
+                {"text": "Gee I don't know, I think I'm actually just gonna stay home", "index": 36, "length": 1, "next": 38},
+                {"text": "Hmph, I don't need your help oold man", "index": 37, "length": 1, "next": 37}
+              ]
+             },
+             {"type":"normal", "text": "No problemo fluff ball. If you’re ready, then let’s go get you some supplies before we head out of town.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Don’t sweat it kid, you totally got this. How about while we get you relaxed, we’ll get some supplies for you together before we head out of town.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "What a feisty fluff ball for someone so small. Let’s get you some supplies before we head out of town.", "speaker":"Knight Bunny"}
+        ]
+    }
+
+}
