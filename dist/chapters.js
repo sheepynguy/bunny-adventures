@@ -1,6 +1,6 @@
 "use strict";
 let chapters = {};
-fetch("chapters.json")
+fetch("json/chapters.json")
     .then(res => res.json())
     .then((data) => {
     chapters = data;

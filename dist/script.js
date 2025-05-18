@@ -36,7 +36,7 @@ function start_game() {
     mainscreen = document.getElementById("game-screen");
     mainscreen.style.display = "block";
     textbox.addEventListener("click", next_scene);
-    choice_1.addEventListener("click", next_scene);
+    choice_1.addEventListener("click", next_scene); // i think this needs to be changed to choice; that's why I was getting a weird bug earlier
     choice_2.addEventListener("click", next_scene);
     choice_3.addEventListener("click", next_scene);
     show_chapter(); // start the game
@@ -53,6 +53,8 @@ function show_chapter() {
 }
 /* Variable declarations for moving between scenes and choices */
 let choiceActive = false;
+let creationActive = false;
+let clickInactive = false;
 let nextScene = -1; // a non-negative scene indicates that we need to jump scenes
 let choiceScenesLeft = -1; // counter
 /*This functions moves into the next scene of the chapter.
@@ -60,7 +62,7 @@ let choiceScenesLeft = -1; // counter
   with an "End of Chapter #" text.
 */
 function next_scene() {
-    if (choiceActive)
+    if (choiceActive || creationActive || clickInactive)
         return; // do not advance the textbox if the choice boxes are on the screen
     if (choiceScenesLeft == 0) { // reset all the variables after a scene jump
         scene_index = nextScene - 1;
@@ -74,7 +76,29 @@ function next_scene() {
             choiceScenesLeft--;
         }
         if (current_chapter_key === "chapter0" && scene_index === 29) {
+            const name_button = document.getElementById("name-submit");
+            name_button.addEventListener("click", () => {
+                const name = document.getElementById("player-name");
+                set_name(name.value);
+                creationActive = false;
+                next_scene();
+            });
             launch_character_creation();
+        }
+        else if (current_chapter_key === "chapter0" && scene_index === 31) {
+            creationActive = true;
+            const class_step = document.getElementById("class-step");
+            class_step.style.display = "block";
+            const class_button = document.getElementById("class-submit");
+            class_button.addEventListener("click", () => {
+                const selected_class = document.querySelector('input[name="class"]:checked');
+                if (selected_class) {
+                    set_class(selected_class.value);
+                    creationActive = false;
+                    next_scene();
+                    // fetch the player's name and their class from the JSON file and append it to the end of the statement
+                }
+            });
         }
         const scene = chapter.scenes[scene_index];
         if (scene.type === "special") {
@@ -114,6 +138,7 @@ function show_special_scene() {
         if (scene.type === "normal") {
             return; // return from this function if it's a normal scene
         }
+        clickInactive = true;
         if (scene.speaker) { // change the speaker name if the speaker is not the narrator
             speaker.textContent = scene.speaker;
         }
@@ -128,6 +153,7 @@ function show_special_scene() {
             textbox.textContent += scene.text[ss_index];
             yield delay(2000); // adjust the delay after adding in the images.
         }
+        clickInactive = false;
     });
 }
 /*This function will move into the next scene based on the choice button pressed.
@@ -157,9 +183,4 @@ function choice(branch) {
     choiceActive = false;
     const buttons = document.getElementById("button-container");
     buttons.style.display = "none";
-}
-/*This function will launch the character creation box and set up the display*/
-function launch_character_creation() {
-    const cc_screen = document.getElementById("character-creation-screen");
-    cc_screen.style.display = "block";
 }
