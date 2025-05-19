@@ -5,23 +5,24 @@ type Item = {
 };
 
 type Character = {
+    name: string;
     class: string;
     health: number;
     attack: number;
     inventory: Item[];
 };
 
-type Characters = Record<string, Character>;
+let characters: Record<number, Character> = {};
 
 /*This function will launch the character creation box and set up the display*/
 function launch_character_creation() {
     const cc_screen = document.getElementById("character-creation-screen") as HTMLDivElement;
     cc_screen.style.display = "block";
-    creationActive = true;
+
 }
 
-let temp_name = "";
 let temp: Character = {
+    name: "",
     class: "",
     health: 0,
     attack: 0,
@@ -32,7 +33,7 @@ function set_name(name: string){
     if(name.length === 0){
         return;
     }
-    temp_name = name;
+    temp.name = name;
 
     // close the name box and progress the text box
     const name_box = document.getElementById("name-step") as HTMLDivElement;
@@ -71,13 +72,25 @@ function set_class(specialty: string){
 
     let i;
     for(i = 0; i < 5; i++){
-        temp.health = health_low + (Math.random() % health_high);
+        temp.health = health_low + Math.floor(Math.random() % health_high);
     }
     for(i = 0; i < 5; i++){
-        temp.attack = attack_low + (Math.random() % attack_high);
+        temp.attack = attack_low + Math.floor(Math.random() % attack_high);
     }
 
     temp.class = specialty;
     const class_box = document.getElementById("class-step") as HTMLDivElement;
     class_box.style.display = "none";
+
+    console.log("Sending character: ", temp);
+    fetch("http://localhost:5001/api/characters", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(temp)
+    })
+    .then(res => res.json())
+    .catch(err => console.error("Fetch failed: ", err));
+    
 }

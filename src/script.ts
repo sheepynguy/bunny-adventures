@@ -87,6 +87,7 @@ function next_scene() {
                 next_scene();
             });
             launch_character_creation();
+                creationActive = true;
         }
         else if(current_chapter_key === "chapter0" && scene_index === 31){
             creationActive = true;
@@ -100,6 +101,19 @@ function next_scene() {
                     creationActive = false;
                     next_scene();
                     // fetch the player's name and their class from the JSON file and append it to the end of the statement
+
+                    fetch("http://localhost:5001/api/characters", {
+                     method: "GET",
+                     headers: {
+                        "Content-Type": "application/json"
+                     }
+                    })
+                     .then(res => res.json())
+                     .then(data => {
+                        characters = data;
+                        textbox.textContent += characters[0].class + " " + characters[0].name;  // name is not appearing
+                     })
+                    .catch(err => console.error("Fetch failed: ", err));
                 }
             })
         }

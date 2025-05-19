@@ -60,7 +60,7 @@
               "choices":[
                 {"text": "Thanks for offering, I'll take you up on that!", "index": 35, "length": 1, "next": 38},
                 {"text": "Gee I don't know, I think I'm actually just gonna stay home", "index": 36, "length": 1, "next": 38},
-                {"text": "Hmph, I don't need your help oold man", "index": 37, "length": 1, "next": 37}
+                {"text": "Hmph, I don't need your help old man", "index": 37, "length": 1, "next": 37}
               ]
              },
              {"type":"normal", "text": "No problemo fluff ball. If you’re ready, then let’s go get you some supplies before we head out of town.", "speaker":"Knight Bunny"},
