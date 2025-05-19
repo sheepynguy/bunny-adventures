@@ -19,6 +19,17 @@ app.get('/api/characters', (req: any, res: any) =>{
 });
 
 app.post('/api/characters', (req: any, res:any) => {
-    fs.writeFileSync(jsonFilePath, JSON.stringify(req.body, null, 2), 'utf-8'); // write the new data into the json file
-    res.send('Characters updated'); // send a response saying that the file was updated
+    const character = req.body;
+
+    const data = fs.readFileSync(jsonFilePath, 'utf-8');    // get the data from the json file
+    const json = JSON.parse(data);
+    json.characters[character.name] = {
+        class: character.class,
+        health: character.health,
+        attack: character.attack,
+        inventory: character.inventory || []
+    };
+
+    fs.writeFile(jsonFilePath, JSON.stringify(json, null, 2));
+    res.status(201).json({message: 'Character added successfully'});
 });

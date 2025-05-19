@@ -5,7 +5,6 @@ type Item = {
 };
 
 type Character = {
-    name: string;
     class: string;
     health: number;
     attack: number;
