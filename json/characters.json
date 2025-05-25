@@ -1,3 +1,9 @@
 {
-
+  "0": {
+    "name": "gurt",
+    "class": "mage",
+    "health": 50,
+    "attack": 5,
+    "inventory": []
+  }
 }
