@@ -174,7 +174,7 @@ async function next_scene_0() {
                      .then(res => res.json())
                      .then(data => {
                         characters = data;
-                        textbox.textContent += characters[0].class + " " + characters[0].name;  // name is not appearing
+                        textbox.textContent += characters[0].class + " " + characters[0].name;
                      })
                     .catch(err => console.error("Fetch failed: ", err));
                 }
@@ -187,7 +187,7 @@ async function next_scene_0() {
             characters = await res.json();
 
             let char = characters[0];
-            //add_inventory(items["chapter0"][char.class])
+            add_inventory(items["chapter0"][char.class][choice_picked], 1, 0);
         }
 
         const scene = chapter.scenes[scene_index];
