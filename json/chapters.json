@@ -9,7 +9,7 @@
              "choices": [
                 {"text": "You get out of here before I sucker kick you!", "index": 4, "length": 2, "next": 14},
                 {"text": "Take all my money! Just don’t hurt me!", "index": 6, "length": 4, "next": 14},
-                {"text": "You’ll have to catch me first!", "index": 11, "length": 4, "next": 14}
+                {"text": "You’ll have to catch me first!", "index": 11, "length": 4, "next": 15}
              ]
             },
             {"type": "normal", "text": "Ha! You don’t scare me you little bunny. I’ll show you whose boss right now!", "speaker": "Robber"},
@@ -23,13 +23,14 @@
             {"type": "normal", "text": "Nice try kid, but now I’m really going to take your gold!", "speaker": "Robber"},
             {"type": "normal", "text": "The robber shoves you onto the ground and gets ready to hit you with the spear. You close your eyes in anticipation, when suddenly"},
             {"type": "normal", "text": "You hear a thump to the ground followed by a groan. You rub the dust out of your eyes and look up to see a knight bunny holding his sword over the robber!"},
+            {"type": "normal", "text": "You hear a thump to the ground followed by a groan. You open your eyes and look up to see a knight bunny holding his sword over the robber!"},
             {"type": "normal", "text": "Looks like I got to you just in time! You alright there kiddo?", "speaker": "Knight Bunny"},
             {"type": "normal", "text": "The knight bunny helps you up and starts to brush some of the dirt off of your fur."},
             {"type": "normal", "text": "You almost had a little tussle there kiddo, thank goodness you were already close to the adventurer’s guild. You looking to be an adventurer?", "speaker": "Knight Bunny",
              "choices": [
-                {"text": "You betcha!", "index": 18, "length": 1, "next": 21},
-                {"text": "I totally had it under control", "index": 19, "length": 1, "next": 21},
-                {"text": "Not anymore, the outside world is scary!", "index": 20, "length": 1, "next": 21}
+                {"text": "You betcha!", "index": 19, "length": 1, "next": 22},
+                {"text": "I totally had it under control", "index": 20, "length": 1, "next": 22},
+                {"text": "Not anymore, the outside world is scary!", "index": 21, "length": 1, "next": 22}
              ]
             },
             {"type": "normal", "text": "That's the spirit! Let's get you over to the guild.", "speaker":"Knight Bunny"},
@@ -58,14 +59,39 @@
              {"type":"normal", "text": "You’ve done it! Congratulations on registering for the adventurers guild. But now what?"},
              {"type":"normal", "text": "Good job kiddo, now you can go off onto the next town and see the cool sights as a newbie. I could be part of your party until the next town if you want, I have some business over there anyway.", "speaker":"Knight Bunny",
               "choices":[
-                {"text": "Thanks for offering, I'll take you up on that!", "index": 35, "length": 1, "next": 38},
-                {"text": "Gee I don't know, I think I'm actually just gonna stay home", "index": 36, "length": 1, "next": 38},
-                {"text": "Hmph, I don't need your help old man", "index": 37, "length": 1, "next": 37}
+                {"text": "Thanks for offering, I'll take you up on that!", "index": 36, "length": 1, "next": 39},
+                {"text": "Gee I don't know, I think I'm actually just gonna stay home", "index": 37, "length": 1, "next": 39},
+                {"text": "Hmph, I don't need your help old man", "index": 38, "length": 1, "next": 39}
               ]
              },
              {"type":"normal", "text": "No problemo fluff ball. If you’re ready, then let’s go get you some supplies before we head out of town.", "speaker":"Knight Bunny"},
              {"type":"normal", "text": "Don’t sweat it kid, you totally got this. How about while we get you relaxed, we’ll get some supplies for you together before we head out of town.", "speaker":"Knight Bunny"},
-             {"type":"normal", "text": "What a feisty fluff ball for someone so small. Let’s get you some supplies before we head out of town.", "speaker":"Knight Bunny"}
+             {"type":"normal", "text": "What a feisty fluff ball for someone so small. Let’s get you some supplies before we head out of town.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "You exit the adventurers guild and go towards the merchants alley with Knight Bunny."},
+             {"type":"normal", "text": "First order of business, we need to get you some items. Let's go to Wallace's Weapons Shop.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "You head into Wallace's Weapons Shop and meet a scruffy bunny."},
+             {"type":"normal", "text": "Hmph, we're not open yet. Come back later.", "speaker": "Wallace"},
+             {"type":"normal", "text": "Good morning Wallace! Maybe just one small exception for me?", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Hmph, fine. What can I help you with?", "speaker":"Wallace"},
+             {"type":"normal", "text": "This squirt here needs a basic weapon. They're starting their adventurer journey with me today!", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Wallace turns to look at you."},
+             {"type":"normal", "text": "Hmph, kid, I think you're better off looking for some other bunny to adventure with. This Knight is a nutcase.", "speaker":"Wallace"},
+             {"type":"normal", "text": "Rude! Anyway, what selections do you have for beginner adventurers?", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Hmph, I don't have much, just the ones on the wall over there.", "speaker":"Wallace"},
+             {"type":"normal", "text": "You move over to the weapons wall. The amount of weapons on the wall is crazy!"},
+             {"type":"special", "text": "Let's see let's see... Here we go.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Which one out of these do you want to get?", "speaker":"Knight Bunny",
+              "choices": [
+                {"text": "(100G) Basic ", "index": 42, "length": 1, "next":45},
+                {"text": "(150G) Intermediate ", "index":43, "length": 1, "next":45},
+                {"text": "(200G) Advanced ", "index":44, "length":1, "next":45}
+              ]
+            },
+            {"type":"normal", "text": "A solid choice, with plenty of gold to upgrade later too!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "That's a pretty good weapon right there!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Starting off with the big guns huh?", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Now that we've you got with a weapon, let's go get you some potions for the road. Thanks for the hospitality Wallace!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Hmph.", "speaker":"Wallace"}
         ]
     }
 

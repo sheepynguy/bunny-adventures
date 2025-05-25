@@ -19,7 +19,7 @@ const npc_2 = document.getElementById("character-image-2"); // holds the player'
 const choice_1 = document.getElementById("choice-1");
 const choice_2 = document.getElementById("choice-2");
 const choice_3 = document.getElementById("choice-3");
-/* Helper functions */
+/* Helper functions and variables */
 function delay(ms) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve) => setTimeout(resolve, ms));
@@ -35,13 +35,23 @@ function start_game() {
     mainscreen.style.display = "none";
     mainscreen = document.getElementById("game-screen");
     mainscreen.style.display = "block";
-    textbox.addEventListener("click", next_scene);
+    //textbox.addEventListener("click", next_scene);
+    textbox.addEventListener("click", () => {
+        if (chapter_index === 0) {
+            next_scene_0();
+        }
+        else {
+            next_scene();
+        }
+    });
     choice_1.addEventListener("click", next_scene); // i think this needs to be changed to choice; that's why I was getting a weird bug earlier
     choice_2.addEventListener("click", next_scene);
     choice_3.addEventListener("click", next_scene);
     show_chapter(); // start the game
 }
-/* This function opens up the chapter with the starting scene */
+/* This function opens up the chapter with the starting scene
+   Would it be better to have a separate next_scene for chapter 0 since there are so many set up options?
+*/
 function show_chapter() {
     const chapter = chapters[current_chapter_key];
     const scene = chapter.scenes[scene_index];
@@ -49,11 +59,9 @@ function show_chapter() {
         return;
     }
     textbox.textContent = scene.text;
-    console.log("hello!");
 }
 /* Variable declarations for moving between scenes and choices */
 let choiceActive = false;
-let creationActive = false;
 let clickInactive = false;
 let nextScene = -1; // a non-negative scene indicates that we need to jump scenes
 let choiceScenesLeft = -1; // counter
@@ -62,7 +70,7 @@ let choiceScenesLeft = -1; // counter
   with an "End of Chapter #" text.
 */
 function next_scene() {
-    if (choiceActive || creationActive || clickInactive)
+    if (choiceActive || clickInactive)
         return; // do not advance the textbox if the choice boxes are on the screen
     if (choiceScenesLeft == 0) { // reset all the variables after a scene jump
         scene_index = nextScene - 1;
@@ -74,44 +82,6 @@ function next_scene() {
     if (scene_index < chapter.scenes.length) {
         if (nextScene != -1) { // we need to jump to consider whether we need to jump scenes after a choice was made
             choiceScenesLeft--;
-        }
-        if (current_chapter_key === "chapter0" && scene_index === 29) {
-            const name_button = document.getElementById("name-submit");
-            name_button.addEventListener("click", () => {
-                const name = document.getElementById("player-name");
-                set_name(name.value);
-                creationActive = false;
-                next_scene();
-            });
-            launch_character_creation();
-            creationActive = true;
-        }
-        else if (current_chapter_key === "chapter0" && scene_index === 31) {
-            creationActive = true;
-            const class_step = document.getElementById("class-step");
-            class_step.style.display = "block";
-            const class_button = document.getElementById("class-submit");
-            class_button.addEventListener("click", () => {
-                const selected_class = document.querySelector('input[name="class"]:checked');
-                if (selected_class) {
-                    set_class(selected_class.value);
-                    creationActive = false;
-                    next_scene();
-                    // fetch the player's name and their class from the JSON file and append it to the end of the statement
-                    fetch("http://localhost:5001/api/characters", {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                        characters = data;
-                        textbox.textContent += characters[0].class + " " + characters[0].name; // name is not appearing
-                    })
-                        .catch(err => console.error("Fetch failed: ", err));
-                }
-            });
         }
         const scene = chapter.scenes[scene_index];
         if (scene.type === "special") {
@@ -142,6 +112,104 @@ function next_scene() {
         current_chapter_key = `chapter${chapter_index}`;
         scene_index = 0;
     }
+}
+/* This function moves through only chapter 0.
+   Takes care of character setup and battle tutorial.
+   The variables just below are relevant to just this function
+*/
+let creationActive = false;
+let choice_picked = -1;
+function next_scene_0() {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (choiceActive || creationActive || clickInactive)
+            return; // do not advance the textbox if the choice boxes are on the screen
+        if (choiceScenesLeft == 0) { // reset all the variables after a scene jump
+            scene_index = nextScene - 1;
+            nextScene = -1;
+            choiceScenesLeft = -1;
+        }
+        const chapter = chapters[current_chapter_key];
+        scene_index++;
+        if (scene_index < chapter.scenes.length) {
+            if (nextScene != -1) { // we need to jump to consider whether we need to jump scenes after a choice was made
+                choiceScenesLeft--;
+            }
+            if (scene_index === 29) { // This is for setting up character creation and name handling
+                const name_button = document.getElementById("name-submit");
+                name_button.addEventListener("click", () => {
+                    const name = document.getElementById("player-name");
+                    set_name(name.value);
+                    creationActive = false;
+                    next_scene();
+                });
+                launch_character_creation();
+                creationActive = true;
+            }
+            else if (scene_index === 31) { // This is for setting up the class creation
+                creationActive = true;
+                const class_step = document.getElementById("class-step");
+                class_step.style.display = "block";
+                const class_button = document.getElementById("class-submit");
+                class_button.addEventListener("click", () => {
+                    const selected_class = document.querySelector('input[name="class"]:checked');
+                    if (selected_class) {
+                        set_class(selected_class.value);
+                        creationActive = false;
+                        next_scene();
+                        // fetch the player's name and their class from the JSON file and append it to the end of the statement
+                        fetch("http://localhost:5001/api/characters", {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                            characters = data;
+                            textbox.textContent += characters[0].class + " " + characters[0].name; // name is not appearing
+                        })
+                            .catch(err => console.error("Fetch failed: ", err));
+                    }
+                });
+            }
+            else if (scene_index === 41) { // This is for buying the first item and adding it to the inventory
+                // based on the branch, add the weapon to the branch and update the inventory in the JSON file
+                let item_name = "";
+                const res = yield fetch("http://localhost:5001/api/characters");
+                characters = yield res.json();
+                let char = characters[0];
+                //add_inventory(items["chapter0"][char.class])
+            }
+            const scene = chapter.scenes[scene_index];
+            if (scene.type === "special") {
+                show_special_scene();
+            }
+            else {
+                textbox.textContent = scene.text;
+                if (scene.speaker) { // change the speaker name if the speaker is not the narrator
+                    speaker.textContent = scene.speaker;
+                }
+                else {
+                    speaker.textContent = "";
+                }
+                if (scene.choices) { // show the choice buttons and the text that needs to go inside them
+                    const buttons = document.getElementById("button-container");
+                    buttons.style.display = "block";
+                    choice_1.textContent = scene.choices[0].text;
+                    choice_2.textContent = scene.choices[1].text;
+                    choice_3.textContent = scene.choices[2].text; // this will change depending on whether we always implement 3 choices
+                    choiceActive = true;
+                }
+            }
+        }
+        else { // end the scene and increment to the next chapter
+            textbox.textContent = `End of Chapter ${chapter_index}`;
+            speaker.textContent = ""; // empty out the speaker box
+            chapter_index++;
+            current_chapter_key = `chapter${chapter_index}`;
+            scene_index = 0;
+        }
+    });
 }
 /*This function will handle any special scenes in the story*/
 function show_special_scene() {
@@ -193,6 +261,7 @@ function choice(branch) {
     if (scene.speaker) { // change the speaker name if the speaker is not the narrator
         speaker.textContent = scene.speaker;
     }
+    choice_picked = branch;
     choiceActive = false;
     const buttons = document.getElementById("button-container");
     buttons.style.display = "none";

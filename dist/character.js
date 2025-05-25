@@ -1,5 +1,16 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const ClassAvailable = ["knight", "priest", "warrior", "archer", "mage"]; // if ItemSet updates, you also need to update this too
 let characters = {};
+let items = {};
 /*This function will launch the character creation box and set up the display*/
 function launch_character_creation() {
     const cc_screen = document.getElementById("character-creation-screen");
@@ -7,7 +18,7 @@ function launch_character_creation() {
 }
 let temp = {
     name: "",
-    class: "",
+    class: "knight", // default to be a knight
     health: 0,
     attack: 0,
     inventory: []
@@ -68,7 +79,9 @@ function set_class(specialty) {
     for (i = 0; i < 5; i++) {
         temp.attack = attack_low + Math.floor(Math.random() % attack_high);
     }
-    temp.class = specialty;
+    if (ClassAvailable.includes(specialty)) { // if the string
+        temp.class = specialty;
+    }
     const class_box = document.getElementById("class-step");
     class_box.style.display = "none";
     console.log("Sending character: ", temp);
@@ -82,3 +95,52 @@ function set_class(specialty) {
         .then(res => res.json())
         .catch(err => console.error("Fetch failed: ", err));
 }
+/*
+This function will receive an item name, the amount, and the character the item needs to be added to.
+For any non-gold item that has an amount over 99, do not add. Return with an error message to console if this occurs.
+If the character already has an item of this name in their inventory, add new amount to old and check against 99. Return an error message if overflow occurs.
+All weapons can only occupy one spot. If there are duplicates of an item, put a copy marker of (#) inside.
+For any character index that it not present in the JSON file, return with an error message to console.
+*/
+function add_inventory(item, amount, character) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield fetch("http://localhost:5001/api/characters"); // wait for the characters fetch before moving on
+        characters = yield res.json();
+        // single out the character if present. return if not present
+        if (Object.keys(characters).length < character) {
+            return;
+        }
+        let char = characters[character];
+        if (amount > 99) {
+            return;
+        }
+        // currently will only take care of no overflow whatsoever, just overwrite the contents
+        let temp_item = {
+            name: item,
+            count: amount,
+            image: "" // need to implement a search for the image
+        };
+        // push the temporary onto the array and send it back into the JSON file
+        char.inventory.push(temp_item);
+        console.log("Adding to " + characters[character].name + "'s inventory");
+        fetch("http://localhost:5001/api/characters", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(char)
+        })
+            .then(res => res.json())
+            .catch(err => console.error("Fetch failed: ", err));
+    });
+}
+// fetch items json immediately
+fetch("json/items.json")
+    .then(res => res.json())
+    .then((data) => {
+    items = data;
+    console.log("Items loaded");
+})
+    .catch((err) => {
+    console.error("Failed to load items:", err);
+});
