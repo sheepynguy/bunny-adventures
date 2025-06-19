@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const ClassAvailable = ["knight", "priest", "warrior", "archer", "mage"]; // if ItemSet updates, you also need to update this too
 let characters = {};
+let weapons = {};
 let items = {};
 /*This function will launch the character creation box and set up the display*/
 function launch_character_creation() {
@@ -23,7 +24,9 @@ let temp = {
     attack: 0,
     inventory: []
 };
-/*This function will get the name typed from the input textbox and store it into a temporary space*/
+/*This function will get the name typed from the input textbox and store it into a temporary space
+5/28: there is something wrong with the text progression of the name change
+*/
 function set_name(name) {
     if (name.length === 0) {
         return;
@@ -36,6 +39,7 @@ function set_name(name) {
 /*This function will receive the class selected and populate the health
   and attack stats for the character.
   Available classes are knight, warrior, priest, archer, mage
+  5/28: there is something wrong with the text progression of the text change into the next box
 */
 function set_class(specialty) {
     let health_low = 0, health_high = 0, attack_low = 0, attack_high = 0;
@@ -104,7 +108,7 @@ For any character index that it not present in the JSON file, return with an err
 */
 function add_inventory(item, amount, character) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield fetch("http://localhost:5001/api/characters"); // wait for the characters fetch before moving on
+        const res = yield fetch("http://localhost:5001/api/inventory"); // wait for the characters fetch before moving on
         characters = yield res.json();
         // single out the character if present. return if not present
         if (Object.keys(characters).length < character) {
@@ -122,9 +126,8 @@ function add_inventory(item, amount, character) {
         };
         // push the temporary onto the array and send it back into the JSON file
         char.inventory.push(temp_item);
-        console.log("Adding to " + characters[character].name + "'s inventory");
-        fetch("http://localhost:5001/api/characters", {
-            method: "POST",
+        fetch("http://localhost:5001/api/inventory", {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -134,13 +137,21 @@ function add_inventory(item, amount, character) {
             .catch(err => console.error("Fetch failed: ", err));
     });
 }
-// fetch items json immediately
+// fetch weapons json immediately; supplied at the beginning and is not meant to be changed
+fetch("json/weapons.json")
+    .then(res => res.json())
+    .then((data) => {
+    weapons = data;
+    console.log("Weapons loaded");
+})
+    .catch((err) => {
+    console.error("Failed to load weapons:", err);
+});
+// fetch items json immediately; no changes will be made to this json, so this is perfectly fine
+// the structure of this json is currently just a list of items with the Item type. changes to the structure can be made later
 fetch("json/items.json")
     .then(res => res.json())
     .then((data) => {
     items = data;
-    console.log("Items loaded");
-})
-    .catch((err) => {
-    console.error("Failed to load items:", err);
+    console.log("Items retrieved");
 });
