@@ -1,0 +1,30 @@
+{
+    "chapter0": {
+        "knight": [
+                "Basic Side Sword",
+                "Intermediate Short Sword",
+                "Advanced Rapier"
+            ],
+        "priest": [
+                "Basic Wand",
+                "Intermediate Staff",
+                "Advanced Holy Tome"
+            ],
+        "mage": [
+                "Basic Wand",
+                "Intermediate Spellbook",
+                "Advanced Crystal Orb"
+            ],
+        "archer": [
+                "Basic Bow",
+                "Intermediate Long Bow",
+                "Advanced Crossbow"
+            ],
+        "warrior": [
+                "Basic Spear",
+                "Intermediate Axe",
+                "Advanced Warhammer"
+            ]
+    }
+
+}

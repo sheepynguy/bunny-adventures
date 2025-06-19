@@ -6,6 +6,9 @@ type ItemSet = {
     mage: string[];
 }
 
+type ItemType = {
+    item: Item[];
+}
 
 type Item = {
     name: string;
@@ -25,7 +28,8 @@ type Character = {
 };
 
 let characters: Record<number, Character> = {};
-let items: Record<string, ItemSet> = {};
+let weapons: Record<string, ItemSet> = {};
+let items: Record<string, ItemType> = {};
 
 /*This function will launch the character creation box and set up the display*/
 function launch_character_creation() {
@@ -41,7 +45,9 @@ let temp: Character = {
     attack: 0,
     inventory: []
 }
-/*This function will get the name typed from the input textbox and store it into a temporary space*/
+/*This function will get the name typed from the input textbox and store it into a temporary space
+5/28: there is something wrong with the text progression of the name change
+*/
 function set_name(name: string){
     if(name.length === 0){
         return;
@@ -56,6 +62,7 @@ function set_name(name: string){
 /*This function will receive the class selected and populate the health
   and attack stats for the character.
   Available classes are knight, warrior, priest, archer, mage
+  5/28: there is something wrong with the text progression of the text change into the next box
 */
 function set_class(specialty: string){
     let health_low = 0, health_high = 0, attack_low = 0, attack_high = 0;
@@ -118,7 +125,7 @@ All weapons can only occupy one spot. If there are duplicates of an item, put a 
 For any character index that it not present in the JSON file, return with an error message to console.
 */
 async function add_inventory(item: string, amount: number, character: number){
-    const res = await fetch("http://localhost:5001/api/characters");    // wait for the characters fetch before moving on
+    const res = await fetch("http://localhost:5001/api/inventory");    // wait for the characters fetch before moving on
     characters = await res.json();
 
     // single out the character if present. return if not present
@@ -139,10 +146,9 @@ async function add_inventory(item: string, amount: number, character: number){
 
     // push the temporary onto the array and send it back into the JSON file
     char.inventory.push(temp_item);
- 
-    console.log("Adding to " + characters[character].name + "'s inventory");
-    fetch("http://localhost:5001/api/characters", {
-    method: "POST",
+
+    fetch("http://localhost:5001/api/inventory", {
+    method: "PATCH",
     headers: {
         "Content-Type": "application/json"
     },
@@ -155,13 +161,23 @@ async function add_inventory(item: string, amount: number, character: number){
 
 
 
-// fetch items json immediately
-fetch("json/items.json")
+// fetch weapons json immediately; supplied at the beginning and is not meant to be changed
+fetch("json/weapons.json")
   .then(res => res.json())
   .then((data) => {
-    items = data;
-    console.log("Items loaded");
+    weapons = data;
+    console.log("Weapons loaded");
   })
   .catch((err) => {
-    console.error("Failed to load items:", err);
+    console.error("Failed to load weapons:", err);
   });
+
+
+// fetch items json immediately; no changes will be made to this json, so this is perfectly fine
+// the structure of this json is currently just a list of items with the Item type. changes to the structure can be made later
+fetch("json/items.json")
+ .then(res => res.json())
+ .then((data) => {
+    items = data;
+    console.log("Items retrieved");
+ })

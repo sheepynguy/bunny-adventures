@@ -127,7 +127,7 @@ function add_inventory(item, amount, character) {
         // push the temporary onto the array and send it back into the JSON file
         char.inventory.push(temp_item);
         fetch("http://localhost:5001/api/inventory", {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },

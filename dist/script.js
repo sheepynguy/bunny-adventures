@@ -16,7 +16,7 @@ const background = document.getElementById("scene-image"); // holds the backgrou
 const player = document.getElementById("player-image"); // holds the player's image
 const npc_1 = document.getElementById("character-image-1"); // holds the player's image
 const npc_2 = document.getElementById("character-image-2"); // holds the player's image
-const choice_1 = document.getElementById("choice-1");
+const choice_1 = document.getElementById("choice-1"); // holds the text content of the choice buttons
 const choice_2 = document.getElementById("choice-2");
 const choice_3 = document.getElementById("choice-3");
 /* Helper functions and variables */
@@ -44,9 +44,9 @@ function start_game() {
             next_scene();
         }
     });
-    choice_1.addEventListener("click", next_scene); // i think this needs to be changed to choice; that's why I was getting a weird bug earlier
-    choice_2.addEventListener("click", next_scene);
-    choice_3.addEventListener("click", next_scene);
+    // choice_1.addEventListener("click", next_scene); // i think this needs to be changed to choice; that's why I was getting a weird bug earlier
+    // choice_2.addEventListener("click", next_scene); // i actually don't think we need these since the index.html already says that the choice buttons are gonna hit the next choice function (?)
+    // choice_3.addEventListener("click", next_scene);
     show_chapter(); // start the game
 }
 /* This function opens up the chapter with the starting scene
@@ -134,52 +134,6 @@ function next_scene_0() {
             if (nextScene != -1) { // we need to jump to consider whether we need to jump scenes after a choice was made
                 choiceScenesLeft--;
             }
-            if (scene_index === 29) { // This is for setting up character creation and name handling
-                const name_button = document.getElementById("name-submit");
-                name_button.addEventListener("click", () => {
-                    const name = document.getElementById("player-name");
-                    set_name(name.value);
-                    creationActive = false;
-                    next_scene();
-                });
-                launch_character_creation();
-                creationActive = true;
-            }
-            else if (scene_index === 31) { // This is for setting up the class creation
-                creationActive = true;
-                const class_step = document.getElementById("class-step");
-                class_step.style.display = "block";
-                const class_button = document.getElementById("class-submit");
-                class_button.addEventListener("click", () => {
-                    const selected_class = document.querySelector('input[name="class"]:checked');
-                    if (selected_class) {
-                        set_class(selected_class.value);
-                        creationActive = false;
-                        next_scene();
-                        // fetch the player's name and their class from the JSON file and append it to the end of the statement
-                        fetch("http://localhost:5001/api/characters", {
-                            method: "GET",
-                            headers: {
-                                "Content-Type": "application/json"
-                            }
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                            characters = data;
-                            textbox.textContent += characters[0].class + " " + characters[0].name; // name is not appearing
-                        })
-                            .catch(err => console.error("Fetch failed: ", err));
-                    }
-                });
-            }
-            else if (scene_index === 41) { // This is for buying the first item and adding it to the inventory
-                // based on the branch, add the weapon to the branch and update the inventory in the JSON file
-                let item_name = "";
-                const res = yield fetch("http://localhost:5001/api/characters");
-                characters = yield res.json();
-                let char = characters[0];
-                //add_inventory(items["chapter0"][char.class])
-            }
             const scene = chapter.scenes[scene_index];
             if (scene.type === "special") {
                 show_special_scene();
@@ -200,6 +154,76 @@ function next_scene_0() {
                     choice_3.textContent = scene.choices[2].text; // this will change depending on whether we always implement 3 choices
                     choiceActive = true;
                 }
+            }
+            // testing if the branches should go here
+            if (scene_index === 30) { // This is for setting up character creation and name handling
+                const name_button = document.getElementById("name-submit");
+                name_button.addEventListener("click", () => {
+                    const name = document.getElementById("player-name");
+                    set_name(name.value);
+                    creationActive = false;
+                    next_scene();
+                });
+                launch_character_creation();
+                creationActive = true;
+            }
+            else if (scene_index === 32) { // This is for setting up the class creation
+                creationActive = true;
+                const class_step = document.getElementById("class-step");
+                class_step.style.display = "block";
+                const class_button = document.getElementById("class-submit");
+                class_button.addEventListener("click", () => {
+                    const selected_class = document.querySelector('input[name="class"]:checked');
+                    if (selected_class) {
+                        set_class(selected_class.value);
+                        creationActive = false;
+                        next_scene();
+                        // fetch the player's name and their class from the JSON file and append it to the end of the statement
+                        fetch("http://localhost:5001/api/characters", {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                            characters = data;
+                            textbox.textContent += characters[0].class + " " + characters[0].name;
+                        })
+                            .catch(err => console.error("Fetch failed: ", err));
+                    }
+                });
+            }
+            else if (scene_index === 52 || scene_index === 56) { // This is for buying the first item and adding it to the inventory
+                // retrieve the player's information
+                let item_name = ""; // don't need this line; delete when available
+                const res = yield fetch("http://localhost:5001/api/characters");
+                characters = yield res.json();
+                let char = characters[0];
+                // modify the choice buttons to say the weapon based on the character's class
+                if (scene_index === 52) {
+                    choice_1.textContent += weapons["chapter0"][char.class][0];
+                    choice_2.textContent += weapons["chapter0"][char.class][1];
+                    choice_3.textContent += weapons["chapter0"][char.class][2];
+                }
+                // based on the branch, add the weapon to the branch and update the inventory in the JSON file
+                if (scene_index === 56) {
+                    add_inventory(weapons["chapter0"][char.class][choice_picked], 1, 0);
+                }
+            }
+            else if (scene_index === 72 || scene_index === 76) { // This is for buying the first potion set and adding it to the inventory
+                // based on the branch, add the weapon to the branch and update the inventory in the JSON file
+                if (scene_index === 72) {
+                    choice_1.textContent += items["potions"].item[0].name;
+                    choice_2.textContent += items["potions"].item[1].name;
+                    choice_3.textContent += items["potions"].item[2].name;
+                }
+                if (scene_index === 76) {
+                    add_inventory(items["potions"].item[choice_picked].name, 1, 0); // extract from the potions section of the items.json file                
+                }
+            }
+            else if (scene_index === 100) { // must change number upon changes to script
+                minigame_tutorial();
             }
         }
         else { // end the scene and increment to the next chapter
@@ -229,10 +253,10 @@ function show_special_scene() {
         let ss_index = 0;
         textbox.textContent = scene.text[ss_index];
         // show the image here
-        yield delay(2000);
+        yield delay(1000);
         for (ss_index++; ss_index < scene.text.length; ss_index++) {
             textbox.textContent += scene.text[ss_index];
-            yield delay(2000); // adjust the delay after adding in the images.
+            yield delay(1000); // adjust the delay after adding in the images.
         }
         clickInactive = false;
     });
@@ -249,13 +273,12 @@ function choice(branch) {
     if (!scene.choices) {
         return;
     }
-    scene_index = scene.choices[branch].index - 1; // pull up the text index for the choice made 
-    console.log(`I am picking choice ${branch} and I am moving to index ${scene_index}`);
+    scene_index = scene.choices[branch].index;
     nextScene = scene.choices[branch].next;
-    choiceScenesLeft = scene.choices[branch].length;
+    choiceScenesLeft = scene.choices[branch].length - 1;
     scene = chapter.scenes[scene_index];
     if (scene.type === "special") {
-        return; // I don't understand why we have to do this check again
+        return;
     }
     textbox.textContent = scene.text;
     if (scene.speaker) { // change the speaker name if the speaker is not the narrator

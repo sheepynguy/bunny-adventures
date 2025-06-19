@@ -79,19 +79,45 @@
              {"type":"normal", "text": "Rude! Anyway, what selections do you have for beginner adventurers?", "speaker":"Knight Bunny"},
              {"type":"normal", "text": "Hmph, I don't have much, just the ones on the wall over there.", "speaker":"Wallace"},
              {"type":"normal", "text": "You move over to the weapons wall. The amount of weapons on the wall is crazy!"},
-             {"type":"special", "text": "Let's see let's see... Here we go.", "speaker":"Knight Bunny"},
+             {"type":"normal", "text": "Let's see let's see... Here we go.", "speaker":"Knight Bunny"},
              {"type":"normal", "text": "Which one out of these do you want to get?", "speaker":"Knight Bunny",
               "choices": [
-                {"text": "(100G) Basic ", "index": 42, "length": 1, "next":45},
-                {"text": "(150G) Intermediate ", "index":43, "length": 1, "next":45},
-                {"text": "(200G) Advanced ", "index":44, "length":1, "next":45}
+                {"text": "(100G) ", "index": 53, "length": 1, "next":56},
+                {"text": "(150G) ", "index":54, "length": 1, "next":56},
+                {"text": "(200G) ", "index":55, "length":1, "next":56}
               ]
             },
             {"type":"normal", "text": "A solid choice, with plenty of gold to upgrade later too!", "speaker":"Knight Bunny"},
             {"type":"normal", "text": "That's a pretty good weapon right there!", "speaker":"Knight Bunny"},
             {"type":"normal", "text": "Starting off with the big guns huh?", "speaker":"Knight Bunny"},
             {"type":"normal", "text": "Now that we've you got with a weapon, let's go get you some potions for the road. Thanks for the hospitality Wallace!", "speaker":"Knight Bunny"},
-            {"type":"normal", "text": "Hmph.", "speaker":"Wallace"}
+            {"type":"normal", "text": "Hmph.", "speaker":"Wallace"},
+            {"type":"normal", "text": "The two of you head out of the weapons shop and walk further down the merchant alley."},
+            {"type":"normal", "text": "As you walk down the alley, an explosion suddenly occurs at the end of the alley!"},
+            {"type":"normal", "text": "Ah, looks like Patrick's up to no good again. At least now you know where the potion's shop is!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Knight Bunny leads you to the end of alley where you're greeted with a smoked out shop and its sign hanging from one side."},
+            {"type":"normal", "text": "Don't worry, you're perfectly safe. I think.", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Knight Bunny shrugs his shoulders, and you both head into the shop."},
+            {"type":"normal", "text": "You doing okay in their Patrick? That was a pretty big smoke cloud that we saw outside.", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Not to worry my boy! Just added a little too much mugwort it seems. I couldn't find my glasses this morning so it's been a little rought today.", "speaker":"Patrick"},
+            {"type":"normal", "text": "Haha Patrick, you never fail to crack me up! We're here to get some potions for this newbie I'm helping out. Where are your beginner potions?", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "They should be in that wall of over there. Or is it that wall? I can't seem to tell which wall is what right now. I'm sure you'll find it yourself.", "speaker":"Patrick"},
+            {"type":"normal", "text": "Actually I'll just look for it myself. Thanks though, Patrick.", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Of course, you're smart enough to find it! Now to find my glasses...", "speaker":"Patrick"},
+            {"type":"normal", "text": "You and Knight Bunny work your way towards the side wall, where a bunch of potions are lined up."},
+            {"type":"normal", "text": "Looks like these are the potions you can pick out.", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Which one out of these do you want to get?", "speaker":"Knight Bunny",
+              "choices": [
+                {"text": "(100G) ", "index": 73, "length": 1, "next":76},
+                {"text": "(150G) ", "index":74, "length": 1, "next":76},
+                {"text": "(200G) ", "index":75, "length":1, "next":76}
+              ]
+            },
+            {"type":"normal", "text": "A solid choice, with plenty of gold to upgrade later too!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Just enough to heal you all the way!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "Woah there, who are you planning on fighting?", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "That marks the last of our grocery list! Let's head over to route 0 and get our adventure started!", "speaker":"Knight Bunny"},
+            {"type":"normal", "text": "You and Knight Bunny start making your way to the open fields, where you spot an icky slime. Yuck!"}
         ]
     }
 

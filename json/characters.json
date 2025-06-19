@@ -1,3 +1,22 @@
 {
-
+  "0": {
+    "name": "Caelus",
+    "class": "mage",
+    "health": 50,
+    "attack": 5,
+    "inventory": []
+  },
+  "1": {
+    "name": "Bunny",
+    "class": "archer",
+    "health": 50,
+    "attack": 3,
+    "inventory": [
+      {
+        "name": "Intermediate Long Bow",
+        "count": 1,
+        "image": ""
+      }
+    ]
+  }
 }

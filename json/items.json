@@ -1,30 +1,9 @@
 {
-    "chapter0": {
-        "knight": [
-                "Basic Side Sword",
-                "Intermediate Short Sword",
-                "Advanced Rapier"
-            ],
-        "priest": [
-                "Basic Wand",
-                "Intermediate Staff",
-                "Advanced Holy Tome"
-            ],
-        "mage": [
-                "Basic Wand",
-                "Intermediate Spellbook",
-                "Advanced Crystal Orb"
-            ],
-        "archer": [
-                "Basic Bow",
-                "Intermediate Long Bow",
-                "Advanced Crossbow"
-            ],
-        "warrior": [
-                "Basic Spear",
-                "Intermediate Axe",
-                "Advanced Warhammer"
-            ]
+    "potions": {
+        "item": [
+            {"name": "Basic Potion", "count": 0, "image": ""},
+            {"name": "Intermediate Potion", "count": 0, "image": ""},
+            {"name": "Advanced Potion", "count": 0, "image": ""}
+        ]
     }
-
 }

@@ -45,6 +45,16 @@
             </div>
         </div>
     </div>
+    <div id="minigame-screen" style="display: none;">
+        <div class="textbox" id="minigame-text"></div>
+        <div id="minigame-button-container" style="display: none;">
+            <button class="minigame-button" id="rock-button"><img class="minigame-button-image" src="" alt="rock">ROCK</button>
+            <button class="minigame-button" id="paper-button"><img class="minigame-button-image" src="" alt="paper">PAPER</button>
+            <button class="minigame-button" id="scissors-button"><img class="minigame-button-image" src="" alt="scissors">SCISSORS</button>
+            <button class="minigame-button" onclick=""><img class="minigame-button-image" src="" alt="items">ITEMS</button>
+            <button class="minigame-button" onclick=""><img class="minigame-button-image" src="" alt="RUN">RUN</button>   <!--Do you think if I add a run button it will be funny? Like pokemon lol-->
+        </div>
+    </div>
     <div class="textbox" id="speaker-name"></div>   <!--This box holds the name of the character currently speaking-->
     <div class="textbox" id="main-text" style="border-style: dashed;"></div>  <!--This box will be styled for a certain size; will not adjust to text content--> 
     <!--"click-to-continue" by adding an eventlisterner to the main-text box--> 
@@ -53,6 +63,7 @@
 <!--Add a black out screen between chapters to visually indicate that the chapter is done. Player can also choose to stop story at end of chapters-->
 
 </div>
+<script src="dist/minigame.js"></script>
 <script src="dist/chapters.js"></script>
 <script src="dist/script.js"></script>
 <script src="dist/character.js"></script>
